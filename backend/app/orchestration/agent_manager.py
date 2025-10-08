@@ -23,5 +23,10 @@ class AgentManager:
         return self.agent_health
 
     async def load_balance(self, agent_type: AgentType) -> Optional[BaseAgent]:
-        # For demo: just return agent, extend for advanced LB
+        # For demo: just return the agent, extend for advanced LB
         return await self.get_agent(agent_type)
+
+    async def initialize_agents(self):
+        from ..agents.research_agent import ResearchAgent
+        await self.register_agent(AgentType.research, ResearchAgent())
+        # Register other agents here as needed.
