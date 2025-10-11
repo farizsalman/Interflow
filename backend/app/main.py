@@ -36,3 +36,10 @@ def create_app() -> FastAPI:
     return app
 
 app = create_app()
+
+
+from .db.mongo import init_db
+
+@app.on_event("startup")
+async def on_startup():
+    await init_db()
